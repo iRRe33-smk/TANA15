@@ -17,3 +17,6 @@ function [A]=HouseholderQR(A);
    %
     
  end;
+
+
+ sum(Y - Ax) = residual

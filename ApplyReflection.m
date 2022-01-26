@@ -2,47 +2,41 @@
 % Householder reflection matrix that creates zeros elememts
 % below the diagonal in the first column. 
 %
+function [HA]=ApplyReflection(A);
+  
+% Select the vector x to used for constructing the reflection
+    m=max(size(A));
+    k = 1;
+
+    x=A(k:m,k); 
 
 
-%http://pi.math.cornell.edu/~web6140/TopTenAlgorithms/Householder.html
-
-function [HA]=ApplyReflection(A)
-    [m,n] = size(A);
-    e1 = zeros(n,1);
-    e1(1,1) = 1;
-    
-    disp(e1)
-    
-    
-    % Select the vector x to used for constructing the reflection
-    
-    x=A(:,1); 
-    
     %
     % Find the vector v so that H(v)*x=alpha*e1. 
     %
-    v = x;
-    v(1) = v(1) + norm(x);
-    disp(v')
-    
-    y = x- 2*(v'*x)/(v'*v)*v;
-    disp(y')
-    
-    
-    
-    
-    Hv = eye(n) - 2 * (v*v')/(v'*v);
-    
-    disp(Hv)
-    
-    %
-    % Compute the product  H*A. Treat one column at a time, i.e. 
-    % (HA)(:,k)=H*A(:,k).
-    %
-    HA=zeros(size(A));
-    for k=1:n
-        HA(:,k) = Hv * A(:,k);
-    end
+
+    v=x;
+    v(1) = v(1) + sign(x(1))*norm(x);
 
 
+    H =eye(m);
+    H(k:m,k:m) = eye(length(v)) - 2 * v*v' / (v'*v);
 
+
+    A= H*A;
+
+   HA = A; 
+ 
+ 
+ 
+ 
+ % Compute the product  H*A. Treat one column at a time, i.e. 
+ % (HA)(:,k)=H*A(:,k).
+ %
+ %  HA=zeros(size(A));
+   
+   %y = HA
+   
+   
+  %[m,M] * [m,n] = [m,n]
+   

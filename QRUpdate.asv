@@ -9,19 +9,19 @@ function [R]=QRUpdate(R)
 
 
 for k=1:n
-    %disp([ m k])
-    
+    disp(m)
+    disp(k)
     G = givens(R(k,k),R(m,k));
     
-    I = eye(m,m);
+    I = eye(m,n);
     
     I(k,k) = G(1,1);
-    I(k,m) = G(1,2);
+    I(k,n) = G(1,2);
     I(m,k) = G(2,1);
-    I(m,m) = G(2,2);
+    I(m,n) = G(2,2);
     
-    %disp(I)
-    R = I*R;
+    disp(I')
+    R = I'*R;
 
 end
 % 1,4 2,4 3,4
@@ -31,5 +31,5 @@ end
   % x2=R(m,k). The rotation is applied to the rows k and m.
   %
 
-
+(5,6) * 6*5 = (5.5) 
 %(2,2) 
